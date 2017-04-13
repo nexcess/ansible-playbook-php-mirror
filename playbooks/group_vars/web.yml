@@ -1,0 +1,18 @@
+---
+
+## Nginx
+nginx_remove_default_vhost: true
+nginx_vhosts:
+  - listen: "{{ backnet_addr }}:80 default_server"
+    server_name: "{{ mirror_endpoint }}"
+    root: "{{ mirror_doc_root }}"
+    extra_parameters: |
+      autoindex on;
+      add_after_body /footer.txt;
+
+## Firewalling
+firewall_v4_group_rules:
+  401 allow backnet lb -> http traffic:
+    - "-A INPUT -p tcp --dport 80 -j ACCEPT -s {{ lb_backnet_addrs | join(',') }} -d {{ backnet_addr }}"
+  402 allow intra-web ssh:
+    - "-A INPUT -p tcp --dport 22 -j ACCEPT -s {{ web_backnet_addrs | join(',') }} -d {{ backnet_addr }}"

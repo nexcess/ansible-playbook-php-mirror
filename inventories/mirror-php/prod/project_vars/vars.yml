@@ -1,0 +1,11 @@
+---
+
+## Base Vars
+nex_project_name: "Nexcess(tm) PHP Mirroring"
+
+## Mirror
+mirror_endpoint: "us1.php.net"
+
+## NIC Sanity
+eth0: "em1"
+eth1: "em2"

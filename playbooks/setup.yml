@@ -1,0 +1,15 @@
+---
+
+- include: base.yml
+
+- name: Deploy Webservers
+  hosts: web
+  become: true
+  any_errors_fatal: true
+  pre_tasks:
+    - include: tasks/web.yml mode="pre"
+  roles:
+    - nexcess.php-mirror
+    - nexcess.nginx
+  post_tasks:
+    - include: tasks/web.yml mode="post"
