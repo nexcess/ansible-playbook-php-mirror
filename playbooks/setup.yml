@@ -3,7 +3,7 @@
 - include: base.yml
 
 - name: Deploy Webservers
-  hosts: web
+  hosts: mirror-php
   become: true
   any_errors_fatal: true
   pre_tasks:
@@ -11,5 +11,6 @@
   roles:
     - nexcess.php-mirror
     - nexcess.nginx
+    - nexcess.haproxy
   post_tasks:
     - include: tasks/web.yml mode="post"

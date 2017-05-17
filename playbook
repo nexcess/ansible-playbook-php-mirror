@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT="mirror-ext"
+PROJECT="mirror-php"
 MODE="prod"
 ZONES=("us-midwest-1")
 KEYCHECK="true"
