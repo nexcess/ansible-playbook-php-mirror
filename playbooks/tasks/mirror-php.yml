@@ -1,0 +1,12 @@
+---
+
+- name: Set the SELinux Policy for Mirror Files
+  sefcontext:
+    target="{{ mirror_doc_root }}(/.*)?"
+    setype="httpd_sys_content_t"
+    state="present"
+  when: mode == "post"
+
+- name: Force SELinux Policy Reload
+  command: /sbin/restorecon -R "{{ mirror_doc_root }}"
+  when: mode == "post"

@@ -1,0 +1,12 @@
+---
+
+- src: "https://github.com/nexcess/ansible-role-server.git"
+  name: "nexcess.server"
+- src: "git+https://github.com/nexcess/ansible-role-datadog.git"
+  name: "nexcess.datadog"
+- src: "https://github.com/nexcess/ansible-haproxy.git"
+  name: "nexcess.haproxy"
+- src: "https://github.com/nexcess/ansible-role-nginx.git"
+  name: "nexcess.nginx"
+- src: "https://github.com/nexcess/ansible-role-php-mirror.git"
+  name: "nexcess.php-mirror"

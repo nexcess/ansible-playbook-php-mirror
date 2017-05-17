@@ -1,0 +1,21 @@
+---
+
+- name: Nexcess Software Mirror
+  hosts: all
+  become: true
+  any_errors_fatal: true
+  pre_tasks:
+    - include_vars:
+        dir="{{ inventory_dir }}/project_vars"
+    - include_vars:
+        dir="{{ inventory_dir }}/region_vars"
+        files_matching="{{ nex_zone }}.*"
+    - include_vars:
+        dir="{{ inventory_dir }}/host_vars"
+        files_matching="{{ inventory_hostname }}.yml"
+    - include: tasks/all.yml mode="pre"
+  roles:
+    - nexcess.server
+    - nexcess.datadog
+  post_tasks:
+    - include: tasks/all.yml mode="post"

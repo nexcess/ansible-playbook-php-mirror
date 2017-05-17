@@ -1,0 +1,8 @@
+---
+
+## Base Vars
+ansible_ssh_common_args: "-o ProxyCommand=\"ssh -W %h:%p -q -p {{ nex_jump_port }} {{ lookup('env','USER') }}@{{ nex_jump_box }}\""
+backnet_host: "{{ inventory_hostname.split('.')[0] }}-int"
+kernelcare_key: "{{ vault_kernelcare_key }}"
+server_selinux_enforcing: true
+web_backnet_addrs: []
