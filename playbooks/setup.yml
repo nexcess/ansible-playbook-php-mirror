@@ -10,7 +10,8 @@
     - include: tasks/web.yml mode="pre"
   roles:
     - nexcess.php-mirror
-    - nexcess.nginx
+    - nexcess.apache
+    - nexcess.php
     - nexcess.haproxy
   post_tasks:
     - include: tasks/web.yml mode="post"
