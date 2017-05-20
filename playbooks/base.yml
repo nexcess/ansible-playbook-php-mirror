@@ -16,6 +16,5 @@
     - include: tasks/all.yml mode="pre"
   roles:
     - nexcess.server
-    - nexcess.datadog
   post_tasks:
     - include: tasks/all.yml mode="post"
