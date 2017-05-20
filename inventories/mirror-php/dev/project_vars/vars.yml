@@ -6,9 +6,6 @@ nex_project_name: "Nexcess(tm) PHP Mirroring"
 ## Mirror
 mirror_endpoint: "us1.php.net"
 
-## PHP trigger
-php_mirror_cron_disabled: false
-
 ## NIC Sanity
-eth0: "em1"
-eth1: "em2"
+eth0: "eth0"
+eth1: "eth0"
