@@ -43,4 +43,4 @@ datadog_role_checks: {}
 ## Firewalling
 firewall_v4_group_rules:
   401 allow http traffic:
-    - "-A INPUT -p tcp --dport 80 -j ACCEPT -i {{ eth0 }}"
+    - "-A INPUT -p tcp --dport 80 -j ACCEPT -d {{ frontnet_addr }}"
