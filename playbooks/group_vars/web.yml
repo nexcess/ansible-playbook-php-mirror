@@ -1,5 +1,9 @@
 ---
 
+## PHP Sync (they want it every 5 - 10 mins)
+php_mirror_cron_minute: "*/10"
+php_mirror_cron_hour: "*"
+
 ## Apache
 apache_remove_default_vhost: true
 apache_vhosts:
