@@ -9,6 +9,7 @@
   pre_tasks:
     - include: tasks/web.yml mode="pre"
   roles:
+    - nexcess.datadog
     - nexcess.php-mirror
     - nexcess.apache
     - nexcess.php
