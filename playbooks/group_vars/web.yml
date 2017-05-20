@@ -1,0 +1,46 @@
+---
+
+## Apache
+apache_remove_default_vhost: true
+apache_vhosts:
+  - servername: "{{ mirror_endpoint }}"
+    serveralias: "us.php.net www.php.net"
+    documentroot: "{{ mirror_doc_root }}"
+    options: "-Indexes -MultiViews"
+    extra_parameters: |
+      DirectoryIndex /index.php index.php
+      UseCanonicalName On
+      ErrorDocument 401 /error.php
+      ErrorDocument 403 /error.php
+      ErrorDocument 404 /error.php
+      AddType application/octet-stream .chm .bz2 .tgz .msi
+      AddType application/x-pilot .prc .pdb
+      SetEnv MIRROR_LANGUAGE "en"
+      <IfModule mod_speling.c>
+        CheckSpelling Off
+      </IfModule>
+      ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://{{ backnet_addr }}:9000{{ mirror_doc_root }}/$1
+
+# PHP
+php_fpm_enabled: true
+php_fpm_pools:
+  - name: "{{ nex_project }}"
+    user: "{{ mirror_unix_user }}"
+    group: "{{ mirror_unix_group }}"
+    config:
+      max_children: 128
+      start_servers: 32
+      min_spare_servers: 16
+      max_spare_servers: 32
+      max_requests: 1000
+      process_idle_timeout: "10s"
+      error_log: "{{ mirror_log_dir }}/php-fpm.log"
+      slow_log: "{{ mirror_log_dir }}/php-fpm.slow.log"
+
+## DataDog
+datadog_role_checks: {}
+
+## Firewalling
+firewall_v4_group_rules:
+  401 allow http traffic:
+    - "-A INPUT -p tcp --dport 80 -j ACCEPT -i {{ eth0 }}"
